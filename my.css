@@ -1,0 +1,12 @@
+#itemsList {
+    list-style: none;
+    padding: 0;
+}
+
+li span{
+    display: block;
+}
+
+li span.adress{
+    padding-left: 20px;
+}

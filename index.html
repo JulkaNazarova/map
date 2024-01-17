@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="my.css">
+    <script src="https://api-maps.yandex.ru/v3/?apikey=2ead622d-2a3a-4b4c-acd9-4d1727f5c9da&lang=ru_RU"></script>
+</head>
+<body>
+    <div class="container" style="display: flex;">
+        <div style="width: 20%;">
+            <input type="text"  id="input">
+            <ul id="itemsList">
+            </ul>
+        </div>
+        <div style="width: 80%; " id="map"></div>
+    </div>
+    
+    <template id="row">
+        <li>
+            <span class="city"></span>
+            <span class="adress"></span>
+        </li>
+    </template>
+
+    <script src="my.js"></script>
+    <script src="map.js"></script>
+</body>
+</html>
