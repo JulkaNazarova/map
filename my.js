@@ -13,6 +13,8 @@ const items=[
             45678909,
             23424243
         ],
+        coords:[37.617698,55.755864]
+
 
     },
     {
@@ -22,7 +24,7 @@ const items=[
             1234566,
             45678909
         ],
-
+        coords:[ 39.414526,57.185870]
     },
     {
         city: "Сочи",
@@ -31,7 +33,7 @@ const items=[
             1234566,
             45678909
         ],
-
+        coords:[39.723098,43.585472]
     },
     {
         city: "Ростов-на-Дону",
@@ -40,7 +42,7 @@ const items=[
             1234566,
             45678909
         ],
-
+        coords:[39.720358,47.222078]
     },
     {
         city: "Петрозаводск",
@@ -49,7 +51,7 @@ const items=[
             1234566,
             45678909
         ],
-
+        coords:[34.346878,61.785021]
     },
 ]
 
@@ -83,7 +85,7 @@ const updateList=(items)=>{
         })
 
         itemsList.innerHTML+=`
-        <li>${item.city}
+        <li onclick='showFilial(${item.coords})'>${item.city}
             <br>${item.adress}
             <br>${phonesHtml}
         </li>
@@ -109,3 +111,14 @@ const makeNewItems=(string)=>{
 //первыая отрисовка
 updateList(items)
 
+
+const showFilial=(coords)=>{
+    
+    console.log('sdfsdf')
+    map.location= {
+        center: coords,
+        zoom: 16
+      }
+
+    
+}
