@@ -1,49 +1,65 @@
+var myMap;
 
-ymaps3.ready.then(() => {
+ymaps.ready(init);
 
-  const  {YMap, YMapDefaultSchemeLayer,YMapDefaultFeaturesLayer} = ymaps3;
-    // HTML-элемент.
-    const map = new ymaps3.YMap(document.querySelector('#map'), {
-      location: {
-        center: [37.588144, 55.733842],
-        zoom: 4
-      }
+function  init() {
+     myMap = new ymaps.Map("map", {
+            center: [55.76, 37.64],
+            zoom: 5,
+            type: 'yandex#map'
+        }, {
+            searchControlProvider: 'yandex#search'
+        })
+
+    items.forEach(item => 
+        {   
+            //верстка для балуна
+            let balloonContent=''
+            balloonContent+=`<b>${item.city}</b><hr>`
+
+            let phones=''
+            item.phones.forEach(phone=>{
+                phones+=`<a href='tel:${phone}'>${phone}</a><br>`
+            })
+            balloonContent+=phones
+            
+        //добавляем точку    
+        myMap.geoObjects
+        .add(new ymaps.Placemark(item.coords, {
+            balloonContent: balloonContent
+        }, {
+            preset: 'islands#redSportIcon'
+        })
+        )
+        
     });
-  
-    // рисуем карту
-    map.addChild(new YMapDefaultSchemeLayer())
-    // добавляем слой с маркерами
-    map.addChild(new YMapDefaultFeaturesLayer()); 
+}
 
-    // для каждого элемента создаем и добавляем маркер
-    items.forEach((item)=>{
-      const content = document.createElement('div');
-      content.innerHTML = '<div style="height:20px;width:20px;background-color:red;border:1px solid dotted;border-radius:50%"></div>';
-      const marker = new ymaps3.YMapMarker({
-        coordinates: item.coords,
-        draggable: false
-    }, content);
-    map.addChild(marker);
-    console.log(marker)
-    })
-
-    //const clickCallback = () => alert('О, событие!');
-    //const mouseMoveCallback = () => console.log('Я двигаю мышью...');
-    const stateChangedHandler = (state) => {
-      console.log(state.getLayerState(ymaps3.YMapDefaultSchemeLayer.defaultProps.source + ':ground', 'tile'));
-    };
+function showFilial(x,y) {
+    /*
+    myMap.setZoom(5, {duration: 1000});
+    myMap.setCenter([x,y])
+    myMap.setZoom(16, {duration: 1000});
+    */
     
-    //вешаем события
-    const mapListener = new ymaps3.YMapListener({
-      layer: 'any',
-      // Добавление обработчиков на слушатель.
-      //onClick: clickCallback,
-      //onMouseMove: mouseMoveCallback
-      onStateChanged: stateChangedHandler
-
-    });
-    map.addChild(mapListener);
-
     
+    myMap.setZoom(5, {duration: 500});
+    //////
+    
+    myAction = new ymaps.map.action.Single({
+        center: [x, y],
+        zoom: 15,
+        duration: 1000,
+        timingFunction: "ease-in"
+  });
+  setTimeout(()=>{
+    myMap.action.execute(myAction)
+  },500)
 
-});
+
+    /////
+    
+    console.log(x,y)
+    
+    
+}
