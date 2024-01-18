@@ -43,18 +43,18 @@ function showFilial(x,y) {
     */
     
     
-    myMap.setZoom(5, {duration: 500});
+    myMap.setZoom(5, {duration: 2000});
     //////
     
     myAction = new ymaps.map.action.Single({
         center: [x, y],
         zoom: 15,
-        duration: 1000,
+        duration: 3000,
         timingFunction: "ease-in"
   });
   setTimeout(()=>{
     myMap.action.execute(myAction)
-  },500)
+  },2000)
 
 
     /////
